@@ -1,0 +1,10 @@
+"name","nameEstablishment","surname","email","code","phone","zip","nifCif","street","brandV","brandLR","brandRG","brandSK","role"
+"Manuel","Farmacia Martin","Martin ","m.conamat@conamat.com","T00007","913456789","28001","50777888Z","Paseo de la Castellana 253","0","1","0","1",
+"Manuel","Farmacia Martin","dsdMartin ","m.t@conamat.com","T00007","913456789","28001","50777888Z","Paseo de la Castellana 253","0","1","0","1",
+"Saul","Farmacia Islas","Ramirez Islas","saul.ramirez@disolutionsmx.com","T00007","00445544556434","28001","50777888Z","Paseo de la Castellana 253","1","1","0","0","ROLE_ADMIN"
+"Saul","Farmacia Islas","Ramirez Islas","sramirz@farmaciaperales.com","T00007","913456789","28001","50777888Z","Paseo de la Castellana 253","1","1","0","0",
+"Saul","Farmacia Islas","Ramirez Islas","sramirz@farmaciapeales.com","T00007","913456789","28001","50777888Z","Paseo de la Castellana 253","1","1","0","0",
+"Saul","Farmacia Islas","Ramirez Islas","sramirz@disolutionsmx.com","T00007","913456789","28001","50777888Z","Paseo de la Castellana 253","1","1","0","0",
+"Saul","Farmacia Islas","Ramirez Islas","sarlmnt.soul@gmal.com","T00007","913456789","28001","50777888Z","Paseo de la Castellana 253","1","1","0","0",
+"Saul","Farmacia Islas","Ramirez Islas","sarlmnt.soul@al.com","T00007","913456789","28001","50777888Z","Paseo de la Castellana 253","1","1","0","0",
+"Saúl","Farmacia Islas","Ramírez ","sarlmnt.soul@gmail.com","T00007","0445544556434","28001","50777888Z","Paseo de la Castellana 253","1","1","0","0",
