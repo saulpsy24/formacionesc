@@ -11,6 +11,8 @@ api.get('/asistencias/:turno?',md_auth.ensureAuth,AsistController.getAsistencias
 api.delete('/asist/:id', md_auth.ensureAuth, AsistController.deleteAsist);
 api.delete('/asiste/:id', md_auth.ensureAuth, AsistController.deleteAsistencia);
 
+api.put('/asist/:id',md_auth.ensureAuth,AsistController.ActulizaAsist);
+
 api.get('/asistenciasc/:cliente?',md_auth.ensureAuth,AsistController.getAsistenciasCliente);
 
 

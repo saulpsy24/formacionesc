@@ -47,6 +47,7 @@ function saveAsist(req, res) {
     var aforo2 = new Turno();
     asist.cliente = params.cliente;
     asist.turno = params.turno;
+    asist.check=params.check;
 
     Asist.findOne({
         'cliente': asist.cliente,
@@ -247,6 +248,7 @@ function deleteAsist(req, res) {
 
 
     var id = req.params.id;
+    var id2 = req.params.turno;
 
     Asist.findById(id).populate({
         path: 'turno'
@@ -258,10 +260,10 @@ function deleteAsist(req, res) {
         } else {
             if (!asist) {
                 res.status(404).send({
-                    message: 'No existe el turno'
+                    message: 'No existe el turno. '
                 });
             } else {
-                Turno.findById(asist.turno).exec((error, turnoactualizado) => {
+                Turno.findById(id2).exec((err, turnoactualizado) => {
                     if (err) {
                         res.status(500).send({
                             message: 'error en la peticion'
@@ -269,7 +271,7 @@ function deleteAsist(req, res) {
 
                     } else {
                         if (!turnoactualizado) {
-                            res.status(404).send({ message: 'No existe el turno' });
+                            res.status(404).send({ message: 'No existe el turno.. ' });
                         } else {
                             var aforo;
                             aforo = turnoactualizado.aforo;
@@ -324,6 +326,31 @@ function deleteAsist(req, res) {
     });
 }
 
+function ActulizaAsist(req, res) {
+    var asistid = req.params.id;
+    var update = req.body;
+
+    Asist.findByIdAndUpdate(asistid, update, (err, asistenciaUpdated) => {
+        if (err) {
+            res.status(500).send({
+                message: 'Error al actualizar Asistencia'
+            });
+        } else {
+            if (!asistenciaUpdated) {
+                res.status(404).send({
+                    message: 'No se pudo actualizar Asistencia'
+                });
+
+            } else {
+                res.status(200).send({
+                    asist: asistenciaUpdated
+                });
+
+            }
+        }
+    });
+}
+
 
 
 
@@ -333,6 +360,7 @@ module.exports = {
     getAsistencias,
     deleteAsist,
     getAsistenciasCliente,
-    deleteAsistencia
+    deleteAsistencia,
+    ActulizaAsist
 
 }

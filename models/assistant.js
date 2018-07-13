@@ -9,7 +9,8 @@ var eventSchema = Schema({
    
     turno:{
         type: Schema.ObjectId,ref:'Turno'
-    }
+    },
+    check: Boolean
         
 });
 

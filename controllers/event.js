@@ -137,7 +137,7 @@ function deleteEvent(req, res) {
         } else {
             if (!eventRemoved) {
                 res.status(404).send({
-                    message: 'Evento no  se pudo eliminar'
+                    message: 'Evento no se pudo eliminar.'
                 });
             } else {
                 Turno.findOneAndRemove({event: eventRemoved}, function(err,turnoremoved){
