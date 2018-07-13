@@ -12,8 +12,7 @@ var dossiere_routes = require('./routes/dossiere');
 var event_routes = require('./routes/event');
 var turno_routes = require('./routes/turno');
 var asist_routes = require('./routes/asist');
-app.use(cors());
-app.options('*',cors());
+
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json('application/json'));
@@ -22,7 +21,7 @@ app.use(bodyParser.json('application/json'));
 app.use((req,res,next)=>{
     res.header('Access-Control-Allow-Origin','*');
     res.header('Access-Control-Allow-Headers','Authorization,X-API-KEY,Origin,X-Requested-With,Content-Type,Accept,Access-Control-Allow-Request-Method');
-    res.header('Access-Control-Allow-Methos','GET,POST,OPTIONS,PUT,DELETE');
+    res.header('Access-Control-Allow-Methods','GET,POST,OPTIONS,PUT,DELETE');
     res.header('Allow','GET,POST,OPTIONS,PUT,DELETE');
     next();
     

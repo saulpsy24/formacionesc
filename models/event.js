@@ -7,7 +7,8 @@ var eventSchema = Schema({
     description: String,
     brand: String,
     province:String,
-    image:String
+    image:String,
+    visible:String
         
 });
 
