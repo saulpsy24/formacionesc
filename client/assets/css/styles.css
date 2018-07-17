@@ -1,23 +1,48 @@
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+
   
 .the-icons {
   font-size: 25px;
 }
 
 html, body{
-    background: #f2f2f2;
+    background: white;
     margin: 0px;
 		height: 100%;
-		font-family: 'Roboto', sans-serif;
+		font-family: 'PT Sans', sans-serif;
 		overflow-x: hidden;
+		font-size:17px;
 
 	
 }
-div{font-family: 'Roboto', sans-serif;
+.navbar-light .navbar-brand {
+    color: rgba(255, 255, 255, 0.9);
+    font-family: 'PT Sans', sans-serif;
+}
+h1{
+	color: #0C9CAF;
+}
+h2{
+	color:#0C9CAF;
+}
+h3{
+	color:#0C9CAF;
+}
+h4{
+	color:#0C9CAF;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+}
+.navbar-light .navbar-text a {
+    color: white;
+}
+div{font-family: 'PT Sans', sans-serif;
 
 }
 #over{
-	background-color: #1976D2;
+	background-color: #0C9CAF;
 	margin:0px;
 	width: 100%;
 }
@@ -37,37 +62,37 @@ div{font-family: 'Roboto', sans-serif;
 	text-align: center;
 }
 
-
 .navigation{
 	text-align: center;
-	color: #0C9CAF;
-	background: #ffffff;
+	background: #0C9CAF;
+	color: #ffffff;
+	font-size: 19px;
 	font-family: 'Montserrat', sans-serif;
 
 }
 
 .navigation a{
 	
-	color: #0C9CAF;	
+	color: #ffffff;	
 	margin-left: 10px;
 	margin-right: 10px;
 	display: block;
 	text-decoration: none;
 	transition: background-color .5s ease;	
-  	background-color: #ffffff;
+  	background-color: transparent;
 	
 }
 
 
 .navigation a:hover{
-	color: #0C9CAF;
+	color: #ffffff!important;
 	text-decoration: none;
 	background-color: #015F86;
 	
 }
 .navigation a:visited{
 	text-decoration: none;
-	color: #0C9CAF;
+	color: #ffffff;
 }
 
 .navigation .glyphicon{
@@ -111,8 +136,8 @@ div{font-family: 'Roboto', sans-serif;
 	border-radius:50%;
 }
 .useravatarnav{
-	width:25px;
-	height: 25px;
+	width:33px;
+	height: 33px;
 	border-radius:50%;
 }
 .loginform{
@@ -193,14 +218,11 @@ div{font-family: 'Roboto', sans-serif;
 	height: 317px;
 }
 
-.card {
-	box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  }
+
   
   .card {
 	margin-top: 10px;
 	box-sizing: border-box;
-	border-radius: 15px;
 	background-clip: padding-box;
 	/* width: 40rem; */
 	transition: transform .2s; /* Animation */
@@ -218,11 +240,8 @@ div{font-family: 'Roboto', sans-serif;
   .card .card-image {
 	position: relative;
 	overflow: hidden;
-	border-top-left-radius: 15px;
-	border-top-right-radius: 15px;
   }
   .card .card-image img {
-	border-radius: 2px 2px 0 0;
 	background-clip: padding-box;
 	position: relative;
 	z-index: 0;
@@ -237,7 +256,6 @@ div{font-family: 'Roboto', sans-serif;
   }
   .card .card-content {
 	padding: 16px;
-	border-radius: 0 0 2px 2px;
 	background-clip: padding-box;
 	box-sizing: border-box;
 	
@@ -254,11 +272,7 @@ div{font-family: 'Roboto', sans-serif;
 	border-top: 1px solid rgba(160, 160, 160, 0.2);
 	padding: 16px;
 	background: #ffffff;
-	box-shadow: 0px 0px 2px #333;
-		z-index: 1;
 		
-	border-bottom-left-radius: 15px;
-	border-bottom-right-radius: 15px;
   }
   .card-title{
 	  font-weight: bold;
@@ -314,14 +328,16 @@ div{font-family: 'Roboto', sans-serif;
 }
 
 .card2 {
-	box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 	background: #ffff;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #f2f2f2;
   }
   
   .card2 {
 	margin-top: 10px;
 	box-sizing: border-box;
-	border-radius: 5px;
+	
 	background-clip: padding-box;
 	transition: transform .2s; /* Animation */
 	padding: 2%;
@@ -397,7 +413,7 @@ div{font-family: 'Roboto', sans-serif;
 }
 
 .texto {
-  background-color: #015F86;
+  background-color: #0C9CAF;
   color: white;
   font-size: 14px;
 	padding: 16px 32px;
@@ -414,9 +430,7 @@ div{font-family: 'Roboto', sans-serif;
 }
 .card-img-top {
 	width: 100%;
-	border-top-left-radius: calc(.25rem - 1px);
-	border-top-right-radius: calc(.25rem - 1px);
-	border-radius: 10px;
+	max-height: 40%;
 }
 .colorblanco{
 	color:white;
@@ -472,7 +486,7 @@ background: orange;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    border: 1px solid transparent;
+    border: 1px solid white;
     padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;

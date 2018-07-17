@@ -192,25 +192,28 @@ function savecliente(req, res) {
 function updatecliente(req, res) {
     var clienteId = req.params.id;
 
-    var update = {
-        name: req.body.name,
-        nameEstablishment: req.body.nameEstablishment,
-        surname: req.body.surname,
-        email: req.body.email,
-        code: req.body.code,
-        phone: req.body.phone,
-        zip: req.body.zip,
-        province: req.body.province,
-        nifCif: req.body.nifCif,
-        street: req.body.street,
-        image: req.body.image,
-        brandV: req.body.brandV,
-        brandRG: req.body.brandRG,
-        brandLR: req.body.brandLR,
-        brandSK: req.body.brandSK,
-        file: req.body.file
+    // var update = {
+    //     name: req.body.name,
+    //     nameEstablishment: req.body.nameEstablishment,
+    //     surname: req.body.surname,
+    //     email: req.body.email,
+    //     code: req.body.code,
+    //     phone: req.body.phone,
+    //     zip: req.body.zip,
+    //     province: req.body.province,
+    //     nifCif: req.body.nifCif,
+    //     street: req.body.street,
+    //     image: req.body.image,
+    //     brandV: req.body.brandV,
+    //     brandRG: req.body.brandRG,
+    //     brandLR: req.body.brandLR,
+    //     brandSK: req.body.brandSK,
+    //     file: req.body.file,
+    //     password:req.body.password,
 
-    };
+    // };
+
+    var update =req.body;
 
     if (update.password) {
         //ecnriptar pasword
@@ -312,6 +315,7 @@ function uploadImageCliente(req, res) {
     var file_name = 'No Subido...';
     if (req.files) {
         var file_path = req.files.image.path;
+       // var file_split = file_path.split('\\');
         var file_split = file_path.split('/');
         var file_name = file_split[2];
         var ext_split = file_name.split('\.');
@@ -374,7 +378,8 @@ function updateclienteAdmin(req, res) {
         image: req.body.image,
         surname: req.body.surname,
         phone: req.body.phone,
-        role: req.body.role
+        role: req.body.role,
+        password:req.body.password,
     };
 
     if (update.password) {
@@ -594,6 +599,7 @@ function uploadFile(req, res) {
     var file_name = 'No Subido...';
     if (req.files) {
         var file_path = req.files.file.path;
+        // var file_split = file_path.split('\\');
         var file_split = file_path.split('/');
         var file_name = file_split[2];
         var ext_split = file_name.split('\.');
@@ -664,13 +670,20 @@ function storeUser(req, res) {
     cliente.brandRG = params.brandRG;
     cliente.brandSK = params.brandSK;
     cliente.brandLR = params.brandLR;
-   
-    var password = "FormacionesCAE";
+   var  password=params.password;
+
+   Cliente.findOne({
+    'email': cliente.email
+}, function (err, elements) {
+    if(!elements){
+
+  
     if (password) {
         //ecnriptar pasword
         bcrypt.hash(password, null, null, function (err, hash) {
             cliente.password = hash;
         });
+
 
 
 
@@ -692,7 +705,11 @@ function storeUser(req, res) {
             }
         }
     });
-}}
+}}else{
+    res.status(500).send({message:'Ya hay un registro previo'});
+}});
+    
+}
 
 module.exports = {
     savecliente,
