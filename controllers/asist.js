@@ -8,6 +8,7 @@ var Dossiere = require('../models/dossiere');
 var Eventos = require('../models/event');
 var Espacio = require('../models/espacio');
 var Asist = require('../models/assistant');
+var correo = require('../models/email');
 var Turno = require('../models/turno');
 var Cliente = require('../models/cliente')
 var Notificacion = require('../models/notificacion')
@@ -482,10 +483,44 @@ function ActulizaAsist(req, res) {
         }
     });
 }
+var handlebars = require('handlebars');
 var nodemailer = require('nodemailer');
 function sendMail(req, res) {
-    var params=req.params.html;
-    
+    var email = new correo();
+    var params = req.body;
+    email.username = params.username;
+    email.evento= params.evento;
+    email.fecha = params.fecha;
+    email.lugar= params.lugar;
+    email.gmaps =params.gmaps;
+    email.direccion = params.direccion;
+    email.destino = params.destino;
+
+
+    var readHTMLFile = function (path, callback) {
+        fs.readFile(path, { encoding: 'utf-8' }, function (err, html) {
+            if (err) {
+                throw err;
+                callback(err);
+            }
+            else {
+                callback(null, html);
+            }
+        });
+    };
+    readHTMLFile(__dirname + '/template.html', function (err, html) {
+        var template = handlebars.compile(html);
+        var replacements = {
+            username: email.username,
+            evento:email.evento,
+            fecha:email.fecha,
+            lugar: email.lugar,
+            gmaps:email.gmaps,
+            direccion:email.direccion,
+        };
+   
+    var params = req.params.html;
+
     var transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
@@ -495,19 +530,20 @@ function sendMail(req, res) {
     });
     var mailOptions = {
         from: 'Ing.Saul',
-        to: 'saul.ramirez@disolutionsmx.com',
+        to: email.destino,
         subject: 'Tu evento',
-        html: params
-};
+        html: template(replacements),
+    };
 
-transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-        console.log(error);
-        res.send(500, error.message);
-    } else {
-        console.log("Email sent");
-        res.status(200).jsonp(req.body);
-    }
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+            res.send(500, error.message);
+        } else {
+            console.log("Email sent");
+            res.status(200).jsonp(info);
+        }
+    });
 });
 }
 
