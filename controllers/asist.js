@@ -10,6 +10,7 @@ var Espacio = require('../models/espacio');
 var Asist = require('../models/assistant');
 var Turno = require('../models/turno');
 var Cliente = require('../models/cliente')
+var Notificacion = require('../models/notificacion')
 var ObjectId = require('mongodb').ObjectId;
 
 
@@ -47,7 +48,7 @@ function saveAsist(req, res) {
     var aforo2 = new Turno();
     asist.cliente = params.cliente;
     asist.turno = params.turno;
-    asist.check=params.check;
+    asist.check = params.check;
 
     Asist.findOne({
         'cliente': asist.cliente,
@@ -111,13 +112,62 @@ function saveAsist(req, res) {
                                                     message: 'Error guardando asistencia'
                                                 });
                                             } else {
-                                                res.status(200).send({
-                                                    asistSaved,
-                                                    turnoUpdated
+                                                Cliente.findById(asistSaved.cliente).exec((err, cliente) => {
+                                                    if (err) {
+                                                        res.status(500).send({ message: 'Error conectando al sv' });
+                                                    } else {
+                                                        if (!cliente) {
+                                                            res.status(404).send({ message: 'no existe cliente' });
+                                                        } else {
+                                                            Evento.findById(turnoUpdated.event).exec((err, evento) => {
+                                                                if (err) {
+                                                                    res.status(500).send({ message: 'error en server' });
+                                                                } else {
+                                                                    if (!evento) {
+                                                                        res.status(404).send({ message: 'no hay evento' });
+                                                                    } else {
+                                                                        var noty = new Notificacion();
+                                                                        noty.date = Date();
+                                                                        noty.body = 'El cliente: ' + cliente.name + ' se inscribio al evento ' + evento.title + ' en turno: ' + turnoUpdated.name + ' .';
+                                                                        console.log(noty.body);
+                                                                        noty.save((err, notySaved) => {
+                                                                            if (err) {
+                                                                                res.status(500).send({ message: 'error en server' });
+                                                                            } else {
+                                                                                if (!notySaved) {
+                                                                                    res.status(404).send({ message: 'no hay notificacion' });
+                                                                                } else {
+                                                                                    res.status(200).send({
+                                                                                        asistSaved,
+                                                                                        turnoUpdated,
+                                                                                        notySaved
 
 
 
-                                                });
+                                                                                    });
+                                                                                }
+                                                                            }
+
+                                                                        })
+
+
+                                                                    }
+                                                                }
+
+                                                            });
+
+
+
+
+
+                                                        }
+                                                    }
+
+                                                })
+
+
+
+
                                             }
                                         }
                                     });
@@ -186,6 +236,88 @@ function getAsistencias(req, res) {
         }
     })
 }
+
+function sacarcsv(req, res) {
+    const Json2csvParser = require('json2csv').Parser;
+    const fields = [{
+        label: 'Nombre', value: 'cliente.name'
+    }, {
+        label: 'Apellidos',
+        value: 'cliente.surname'
+    }, {
+        label: 'Farmacia',
+        value: 'cliente.nameEstablishment'
+    }, { label: 'email', value: 'cliente.email' }, { label: 'Codigo de Farmacia', value: 'cliente.code' }, { label: 'Telefono', value: 'cliente.phone' },
+    { label: 'CP', value: 'cliente.zip' }, { label: 'NIF/CIF', value: 'cliente.nifCif' }, { label: 'Direccion', value: 'cliente.street' },
+    { label: 'VICHY', value: 'cliente.brandV' }, { label: 'ROCHE-POSAY', value: 'cliente.brandLR' }, { label: 'RogerGallet', value: 'cliente.brandRG' }, { label: 'SKINS', value: 'cliente.brandSK' },
+    { label: 'CeraVe', value: 'cliente.brandCV' }, { label: 'Rol', value: 'cliente.role' },
+    { label: 'Evento', value: 'turno.event.title' }, { label: 'Turno', value: 'turno.name' }, { label: 'Asistio', value: 'check' }];
+    const json2csvParser = new Json2csvParser({ fields });
+
+
+    var turnoId = req.params.id;
+    if (!turnoId) {
+        //sacar todos los albums de la DB
+        var find = Asist.find({}).sort('name').populate({
+            path: 'turno',
+            populate: {
+                path: 'event'
+            }
+
+
+        }).populate({
+            path: 'cliente'
+        });
+    } else {
+        var find = Asist.find({
+            turno: turnoId
+        }).sort('name').populate({
+            path: 'turno',
+            populate: {
+                path: 'event'
+            }
+
+
+        }).populate({
+            path: 'cliente'
+        });
+    }
+
+    find.exec((err, asistencia) => {
+        if (err) {
+            res.status(500).send({
+                message: 'error'
+            });
+        } else {
+            if (!asistencia) {
+                res.status(404).send({
+                    message: 'no hay asistencias  asociadas'
+                });
+            } else {
+
+                const csv = json2csvParser.parse(asistencia);
+                var path = './exports/csv' + Date.now() + '.csv';
+                fs.writeFile(path, csv, function (err, data) {
+                    if (err) { throw err; }
+                    else {
+                        console.log('file Created');
+                        res.setHeader('Content-disposition', 'attachment; filename=data.csv');
+                        res.set('Content-Type', 'text/csv');
+                        res.download(path)
+                    }
+                });
+
+            }
+        }
+    })
+
+
+}
+
+
+
+
+
 function getAsistenciasCliente(req, res) {
     var clienteId = req.params.cliente;
     if (!clienteId) {
@@ -226,14 +358,14 @@ function getAsistenciasCliente(req, res) {
         }
     })
 }
-function deleteAsistencia(req,res){
-    var idAsist= req.params.id;
-    Asist.findByIdAndRemove(idAsist, (err, asistRemoved)=>{
-        if(err){
-            res.send({message:'nosepudo'});
+function deleteAsistencia(req, res) {
+    var idAsist = req.params.id;
+    Asist.findByIdAndRemove(idAsist, (err, asistRemoved) => {
+        if (err) {
+            res.send({ message: 'nosepudo' });
 
-        }else{
-            res.send({asist:asistRemoved});
+        } else {
+            res.send({ asist: asistRemoved });
         }
 
     });
@@ -350,7 +482,34 @@ function ActulizaAsist(req, res) {
         }
     });
 }
+var nodemailer = require('nodemailer');
+function sendMail(req, res) {
+    var params=req.params.html;
+    
+    var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'sarlmnt.soul@gmail.com',
+            pass: 's@ul24zoo'
+        }
+    });
+    var mailOptions = {
+        from: 'Ing.Saul',
+        to: 'saul.ramirez@disolutionsmx.com',
+        subject: 'Tu evento',
+        html: params
+};
 
+transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+        console.log(error);
+        res.send(500, error.message);
+    } else {
+        console.log("Email sent");
+        res.status(200).jsonp(req.body);
+    }
+});
+}
 
 
 
@@ -361,6 +520,8 @@ module.exports = {
     deleteAsist,
     getAsistenciasCliente,
     deleteAsistencia,
-    ActulizaAsist
+    ActulizaAsist,
+    sacarcsv,
+    sendMail
 
 }

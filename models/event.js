@@ -8,7 +8,14 @@ var eventSchema = Schema({
     brand: String,
     province:String,
     image:String,
-    visible:String
+    visible:String,
+    direccion:String,
+    lugar: String,
+    gmaps:String,
+    dateS:String,
+    dateE:String,
+    value:String,
+    campana:String
         
 });
 

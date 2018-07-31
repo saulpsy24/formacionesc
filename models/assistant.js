@@ -3,10 +3,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var eventSchema = Schema({
-   cliente:{
-       type: Schema.ObjectId,ref:'Cliente'
-   },
-   
+    cliente:{
+        type: Schema.ObjectId,ref:'Cliente'
+    },
+    
     turno:{
         type: Schema.ObjectId,ref:'Turno'
     },

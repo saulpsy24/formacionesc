@@ -18,6 +18,7 @@ var ClienteSchema = Schema({
     brandLR: String,
     brandRG: String,
     brandSK: String,
+    brandCV: String,
     password:String,
     role:String,
     file:String

@@ -589,6 +589,7 @@ function getCliente(req, res) {
             } else {
                 res.status(200).send({
                     cliente
+                    // password =''
                 });
             }
         }
