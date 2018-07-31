@@ -16,6 +16,18 @@
     <link rel="icon" href="https://www.loreal-paris.com.mx/img/favicon.png" type="image/png">
     <link rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+  <script>
+    
+  $(function(){
+    $('[rel=popover]').popover({ 
+      html : true, 
+      content: function() {
+        return $('#popover_content_wrapper').html();
+      }
+    });
+  });
+</script>
+  
   <!-- or -->
   <link rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css"
@@ -25,28 +37,36 @@
 <link href="styles.d41d8cd98f00b204e980.bundle.css" rel="stylesheet"/></head>
 
 <body>
-
-        <div layout="column" layout-fill ng-controller="MainCtrl as mc">
-               
-            
-                <main flex style="height: 100%;">
-                        <app-root>Cargando...</app-root>
-                  
-                </main>
-            
-                <footer>
-                  <md-toolbar class="md-scroll-shrink">
-                    <div layout="row" style="background:#0C9CAF" layout-align="center center" flex>
-                            <a style="color:white;" class="nav-link btn-logout" href="mailto:secretariacae@presstour.es" > <i class="far fa-envelope-open"></i> Mail a: secretariacae@presstour.es</a>
-                    </div>
-                  </md-toolbar>
-                </footer>
-              </div>
-
-
+    <app-root>Cargando...</app-root>
+    <footer  style="background-color:#1198b8">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg 4" style="color:white">
+                    <FONT  SIZE=2 COLOR="white">
+                        Teléfono de atención: 0000 0000 0000
+                    </FONT>
+                        
+                </div>
+                <div class="col-lg 4" >
+                    <FONT SIZE=2 COLOR="white">
+                        Email:
+                        <a href="mailto:secretariacae@presstour.es" style="color:white">secretariacae@presstour.es  </a>
+                    </FONT>
+                </div>
+                <div class="col-lg 4" >
+                    <FONT  SIZE=2 COLOR="white">
+                        Politicas de privacidad
+                    </FONT>
+                </div>
+                <div class="col-lg 4" >
+                    <img id="kDMY_0" style="width:50%;"  src="../../assets/images/logo_presstour.png">
+                </div>
+            </div>
+        </div>
+      </footer>
     
-<script type="text/javascript" src="inline.d6409dd4b7e1a5580b8f.bundle.js"></script><script type="text/javascript" src="polyfills.4698dd837454343dfa80.bundle.js"></script><script type="text/javascript" src="vendor.8f219bbbcc33b1303fc1.bundle.js"></script><script type="text/javascript" src="main.c3ca71df39cbcdfe8cff.bundle.js"></script></body>
-<script type="text/javascript">
+<script type="text/javascript" src="inline.3a3b8f386dd00aa63ff3.bundle.js"></script><script type="text/javascript" src="polyfills.676975c13715ab3c3b4b.bundle.js"></script><script type="text/javascript" src="vendor.7bb78d7e3f23f3bc69b5.bundle.js"></script><script type="text/javascript" src="main.e3ef3205a5f20f677dd8.bundle.js"></script></body>
+<!-- <script type="text/javascript">
     var _smartsupp = _smartsupp || {};
     _smartsupp.key = '460ffceeb3c20ee708d3c2ac0bf8abc20739f890';
     window.smartsupp||(function(d) {
@@ -61,6 +81,6 @@
             $(this).toggleClass('open');
         });
     });
-    </script>
+    </script> -->
   
 </html>

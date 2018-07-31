@@ -1,0 +1,3 @@
+"Nombre","Apellidos","Nombre del Establecimiento","email","code","phone","zip","nifCif","street","brandV","brandLR","brandRG","brandSK","role"
+"Juan","Perez","SAUL RAMIREZ ISLAS","saul@saul.com","T001","5544556434845","07249","022123","CALZADA CHALMA LA VILLA 551, EDIF 16 DEPTO 501","1","1","0","0","ROLE_ADMIN"
+"Saul","Ramirez Islas","Farmacia Perales","saul.ramirez@disolutionsmx.com","T00007","913456789","28001","50777888Z","Paseo de la Castellana 253",,,,,"ROLE_ADMIN"

@@ -1,0 +1,2 @@
+"Nombre","Apellidos","Farmacia","email","Codigo de Farmacia","Telefono","CP","NIF/CIF","Direccion","VICHY","ROCHE-POSAY","RogerGallet","SKINS","CeraVe","Rol","Evento","Turno","Asistio"
+"Saul","Ramirez Islas","Farmacia Perales","saul.ramirez@disolutionsmx.com","T00007","913456789","28001","50777888Z","Paseo de la Castellana 253",,,,,,"ROLE_ADMIN","Evento 1","Vespertino",true
