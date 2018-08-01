@@ -252,7 +252,7 @@ function sacarcsv(req, res) {
     { label: 'CP', value: 'cliente.zip' }, { label: 'NIF/CIF', value: 'cliente.nifCif' }, { label: 'Direccion', value: 'cliente.street' },
     { label: 'VICHY', value: 'cliente.brandV' }, { label: 'ROCHE-POSAY', value: 'cliente.brandLR' }, { label: 'RogerGallet', value: 'cliente.brandRG' }, { label: 'SKINS', value: 'cliente.brandSK' },
     { label: 'CeraVe', value: 'cliente.brandCV' }, { label: 'Rol', value: 'cliente.role' },
-    { label: 'Evento', value: 'turno.event.title' }, { label: 'Turno', value: 'turno.name' }, { label: 'Asistio', value: 'check' }];
+    { label: 'Evento', value: 'turno.event.title' },{label:'Campaña',value:'turno.event.campana'},{label:'Valor',value:'turno.event.value'},{ label: 'Turno', value: 'turno.name' }, { label: 'Asistio', value: 'check' }];
     const json2csvParser = new Json2csvParser({ fields });
 
 
