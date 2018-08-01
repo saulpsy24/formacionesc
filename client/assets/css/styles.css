@@ -14,7 +14,7 @@
 	src: url('../Gotham-Font/Gotham-Light.otf'),
 }
 font{
-	font-family: Gotham, sans-serif;
+	font-family: Gotham-Light, sans-serif;
 }
 html {
 	position: relative;
@@ -31,7 +31,13 @@ html {
 	line-height: 30px; /* Vertically center the text there */
 	background-color: #f5f5f5;
 	}
-
+	p{
+		font-size: 11px;
+		font-family: 'Gotham',sans-serif!important;
+	}
+font{
+	font-size: 11px;
+}
 
   
 .the-icons {
@@ -55,6 +61,7 @@ html, body{
 h1{
 	color: #1198b8;
 	font-family: Gotham, sans-serif !important;
+
 }
 h2{
 	color:#1198b8;
@@ -739,8 +746,18 @@ background: orange;
 	top: 11px;
 	width: 33px;
   }
-  .messaging { padding: 0 0 50px 0;}
+  .messaging { padding: 0 0 50px 0;min-width: 95%;}
   .msg_history {
 	height: 516px;
 	overflow-y: auto;
-  }
+	}
+	
+
+.list-group-item {
+	position: relative;
+	display: block;
+	padding: .75rem 1.25rem;
+	margin-bottom: -1px;
+	background-color: #fff;
+	 border: 0px solid rgba(0,0,0,.125); 
+}
