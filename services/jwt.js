@@ -3,7 +3,7 @@ var jwt = require('jwt-simple');
 var moment = require('moment');
 var secret = 'Zionzoo24#_2018';
 
-exports.createToken= function(user,){
+exports.createToken= function(user){
     var payload = {
         sub: user._id,
         name:user.name,
